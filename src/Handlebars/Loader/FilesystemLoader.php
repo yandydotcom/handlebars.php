@@ -212,25 +212,14 @@ class FilesystemLoader implements Loader
             if(file_exists($assetFile)){
                 $sections = explode('.',$assetFile);
                 $type = array_pop($sections);
-                if(!isset($GLOBALS['App']['assets'][$type])){
-                    $GLOBALS['App']['assets'][$type] = file_get_contents($assetFile);
-                } else{
-                    $GLOBALS['App']['assets'][$type] .= file_get_contents($assetFile);
+                if(!isset($GLOBALS['App']['assets'][$type][$fileName])){
+                    $GLOBALS['App']['assets'][$type][$fileName] = file_get_contents($assetFile);
                 }
             }
         }
-        $this->getGlobalAssests();
     }
 
-    protected function getGlobalAssests(){
-        $globalCssDir = 'public/assets/css/web/global.compiled.css';
-        $globalJsDir = 'public/assets/js/web/global.compiled.js';
 
-        $globalCss = file_get_contents($globalCssDir);
-        $globalJs = file_get_contents($globalJsDir);
-        $GLOBALS['App']['assets']['css'] .= $globalCss;
-        $GLOBALS['App']['assets']['js'] .= $globalJs;
-    }
 
     protected function getAssetFileNames($fileName){
         $paths = explode('/', dirname($fileName));
