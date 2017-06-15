@@ -212,8 +212,8 @@ class FilesystemLoader implements Loader
             if(file_exists($assetFile)){
                 $sections = explode('.',$assetFile);
                 $type = array_pop($sections);
-                if(!isset($GLOBALS['App']['assets'][$type][$fileName])){
-                    $GLOBALS['App']['assets'][$type][$fileName] = file_get_contents($assetFile);
+                if(!isset($GLOBALS['App']['assets'][$type][$assetFile])){
+                    $GLOBALS['App']['assets'][$type][$assetFile] = file_get_contents($assetFile);
                 }
             }
         }
